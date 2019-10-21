@@ -1,0 +1,168 @@
+<html>
+<head>
+    <title>PVAndUV</title>
+    <meta charset="utf-8"><link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* css 代码 */
+    </style>
+    <script src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com.cn/highcharts/modules/drilldown.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+    $(function () {
+        $.ajax({
+            url:"/kafkaNginxShow/PVAndUV",
+            dataType:"json",
+            success : function (data) {
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: '基于Nginx访问日志的自动化PV和UV的统计系统'
+                    },
+                    xAxis: {
+                        type: 'category'
+                    },
+                    yAxis: {
+                        title: {
+                            text: '数量'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    plotOptions: {
+                        series: {
+                            borderWidth: 0,
+                            dataLabels: {
+                                enabled: true,
+                                format: '{point.y:.1f}'
+                            }
+                        }
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b><br/>'
+                    },
+                    series: [{
+                        name: 'PV 和 UV',
+                        colorByPoint: true,
+                        data: data
+                    }],
+                    drilldown: {
+                        series: [{
+                            name: 'PV',
+                            id: 'PV',
+                            data: [
+                                [
+                                    'v40.0',
+                                    5
+                                ],
+                                [
+                                    'v41.0',
+                                    4.32
+                                ],
+                                [
+                                    'v42.0',
+                                    3.68
+                                ],
+                                [
+                                    'v39.0',
+                                    2.96
+                                ],
+                                [
+                                    'v36.0',
+                                    2.53
+                                ],
+                                [
+                                    'v43.0',
+                                    1.45
+                                ],
+                                [
+                                    'v31.0',
+                                    1.24
+                                ],
+                                [
+                                    'v35.0',
+                                    0.85
+                                ],
+                                [
+                                    'v38.0',
+                                    0.6
+                                ],
+                                [
+                                    'v32.0',
+                                    0.55
+                                ],
+                                [
+                                    'v37.0',
+                                    0.38
+                                ],
+                                [
+                                    'v33.0',
+                                    0.19
+                                ],
+                                [
+                                    'v34.0',
+                                    0.14
+                                ],
+                                [
+                                    'v30.0',
+                                    0.14
+                                ]
+                            ]
+                        }, {
+                            name: 'UV',
+                            id: 'UV',
+                            data: [
+                                [
+                                    'v35',
+                                    2.76
+                                ],
+                                [
+                                    'v36',
+                                    2.32
+                                ],
+                                [
+                                    'v37',
+                                    2.31
+                                ],
+                                [
+                                    'v34',
+                                    1.27
+                                ],
+                                [
+                                    'v38',
+                                    1.02
+                                ],
+                                [
+                                    'v31',
+                                    0.33
+                                ],
+                                [
+                                    'v33',
+                                    0.22
+                                ],
+                                [
+                                    'v32',
+                                    0.15
+                                ]
+                            ]
+                        }]
+                    }
+                });
+            }
+        })
+    })
+
+</script>
+</body>
+</html>
